@@ -1,7 +1,7 @@
         pipeline{
             tools{
-                jdk 'ourjava'
-                maven 'ourmaven'
+                jdk 'myjava'
+                maven 'mymaven'
             }
             agent none
             stages{
@@ -19,16 +19,16 @@
                         sh 'mvn compile'
                 }
                 }
-                stage('CodeReview on Slave1'){
-                    agent {label 'slave1'}
+                stage('CodeReview on Slave2'){
+                    agent {label 'slave2'}
                     steps{
                     
                 echo 'codeReview...'
                         sh 'mvn pmd:pmd'
                     }
                 }
-                stage('UnitTest on Slave2'){
-                    agent {label 'slave2'}
+                stage('UnitTest on Slave3'){
+                    agent {label 'slave3'}
                     steps{
                     echo 'Testing'
                         sh 'mvn test'
